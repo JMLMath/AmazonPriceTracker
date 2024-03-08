@@ -1,11 +1,12 @@
 from webRequest import *
 from data import *
+import HTTPServer
 
 
-VERSION = [0,1]
+VERSION = [0,1,2]
 
 def main():
-    print(f"Amazon price tracker v.{VERSION[0]}.{VERSION[1]}")
+    print(f"Amazon price tracker v.{VERSION[0]}.{VERSION[1]}.{VERSION[2]}")
     print("Opening productList.txt...")
     with open("productList.txt","r") as productList:
         print("Reading file...")

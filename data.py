@@ -24,3 +24,25 @@ def addData(productName, url, price):
         data = data.append(newFrame)
         data.to_csv("data.csv", index=False, sep=";")
         return True
+
+def getLastData(csvFile):
+    """Get last product's datas from specified CSV file and returns it.
+    Args :
+        csvFile (str) : the date, product name, product url and product price containing CSV file's address
+    Returns :
+        list : contains 3 list : first contains list of products'url (str), second contains product's name (str), third contains product's price (int)"""
+    data = pd.read_csv(csvFile, sep=";")
+    data = data.sort_values(by=["date"], ascending=False) ##sorting data by dates, from older to latest
+
+    productsUrl = []
+    productsName = []
+    productsPrice = []
+    for index in range(len(data)):
+        url = data["productUrl"].iloc[index]
+        if url not in productsUrl: ##checking if this product was already traited
+            productsUrl.append(url)
+            productsName.append(data["productName"].iloc[index])
+            productsPrice.append(data["price"].iloc[index])
+
+    return [productsUrl, productsName, productsPrice]
+
